@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import dbConnection from "./config/dbConnection.js";
 import { notFound, errorHandler } from "./middlewares/errorMiddleware.js";
 import userRoutes from "./routes/userRoutes.js";
+import blogRoutes from "./routes/blogRoutes.js";
 
 dotenv.config();
 
@@ -19,6 +20,7 @@ app.use(express.json());
 
 // Routes
 app.use("/api/users", userRoutes);
+app.use("/api/blogs", blogRoutes);
 app.use(notFound);
 app.use(errorHandler);
 
