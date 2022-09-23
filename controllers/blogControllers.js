@@ -1,9 +1,11 @@
 import Blog from "../models/blogModel.js";
+import User from "../models/userModel.js";
 import Comment from "../models/commentModel.js";
 import Like from "../models/likeModel.js";
 import asyncHandler from "express-async-handler";
 import { cloudinary } from "../config/cloudinary.js";
 
+// Get all blogs from the database
 const getBlogs = asyncHandler(async (req, res) => {
   const blogs = await Blog.find({})
     .sort({ date: -1 })
@@ -13,6 +15,25 @@ const getBlogs = asyncHandler(async (req, res) => {
   res.send(blogs);
 });
 
+// Get all blogs by a particular user
+const getUserBlogs = asyncHandler(async (req, res) => {
+  const { username } = req.params;
+  const user = await User.findOne({ name: username });
+
+  if (user) {
+    const userBlogs = await Blog.find({ user: user._id })
+      .sort({ data: -1 })
+      .populate("comments")
+      .populate("user")
+      .exec();
+    res.send(userBlogs);
+  } else {
+    res.status(404);
+    throw new Error("User not found.");
+  }
+});
+
+// Add a blog
 const addBlog = asyncHandler(async (req, res) => {
   const { path, filename } = req.file;
   const { user, text } = req.body;
@@ -28,6 +49,7 @@ const addBlog = asyncHandler(async (req, res) => {
   res.send(newBlog);
 });
 
+// Delete a blog
 const deleteBlog = (req, res) => {
   try {
     const { blogId, imageFilename } = req.params;
@@ -44,4 +66,4 @@ const deleteBlog = (req, res) => {
   }
 };
 
-export { getBlogs, addBlog, deleteBlog };
+export { getBlogs, getUserBlogs, addBlog, deleteBlog };

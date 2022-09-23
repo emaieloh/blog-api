@@ -30,7 +30,7 @@ const likeBlog = asyncHandler(async (req, res) => {
         useFindAndModify: false,
       },
       (err, doc) => {
-        Like.deleteMany({ userId, blogId }, (err, doc) => {
+        Like.deleteOne({ userId, blogId }, (err, doc) => {
           res.send(doc);
         });
       }
