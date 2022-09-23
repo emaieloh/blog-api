@@ -1,6 +1,7 @@
 import User from "../models/userModel.js";
 import asyncHandler from "express-async-handler";
 
+// Register a user
 const registerUser = asyncHandler(async (req, res) => {
   const { name, email, password } = req.body;
   const user = await User.findOne({ email });
@@ -29,6 +30,7 @@ const registerUser = asyncHandler(async (req, res) => {
   }
 });
 
+// Login a user
 const loginUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
   const user = await User.findOne({ email });

@@ -2,6 +2,7 @@ import Like from "../models/likeModel.js";
 import Blog from "../models/blogModel.js";
 import asyncHandler from "express-async-handler";
 
+// Like or unlike a blog
 const likeBlog = asyncHandler(async (req, res) => {
   const { userId, blogId } = req.params;
 
