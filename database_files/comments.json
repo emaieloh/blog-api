@@ -1,0 +1,1 @@
+{"_id":{"$oid":"632c72970f63ebc755529678"},"user":"Michael Angelo","text":"This is to test commenting on a blog post","blogId":{"$oid":"632c6bfa55c33b063e891af8"},"createdAt":{"$date":"2022-09-22T14:35:03.377Z"},"updatedAt":{"$date":"2022-09-22T14:35:03.377Z"},"__v":0}
