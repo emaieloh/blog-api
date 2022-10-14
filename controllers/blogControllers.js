@@ -22,7 +22,7 @@ const getUserBlogs = asyncHandler(async (req, res) => {
 
   if (user) {
     const userBlogs = await Blog.find({ user: user._id })
-      .sort({ data: -1 })
+      .sort({ date: -1 })
       .populate("comments")
       .populate("user")
       .exec();
